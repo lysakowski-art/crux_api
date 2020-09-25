@@ -18,4 +18,5 @@ from django.urls import path
 urlpatterns = [
     path('routes/', views.routes_list),
     path('routes/<str:id>', views.routes_id),
+    path('pages/<str:id>', views.pages_id),
  ]

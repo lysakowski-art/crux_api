@@ -1,6 +1,6 @@
 from rest_framework import serializers 
 from DjangoCrudApp.models import Routes
- 
+from DjangoCrudApp.models import Pages 
  
 class RouteSerializer(serializers.ModelSerializer):
  
@@ -15,3 +15,14 @@ class RouteSerializer(serializers.ModelSerializer):
                   'placemant_and_belay_anchor',
                   'route_description',
                   'location')
+
+
+class PageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Pages
+        fields = (
+            '_id',
+            'page_title',
+            'page_content'
+        )

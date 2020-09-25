@@ -15,3 +15,11 @@ class Routes(models.Model):
     route_description=models.CharField(max_length=250)
     #added_by==models.CharField(max_length=30)
     location=models.CharField(max_length=50)
+
+# class Region(models.Model):
+#     region_name=models.CharField()
+
+class Pages(models.Model):
+    _id=models.ObjectIdField()
+    page_title=models.CharField(max_length=50)
+    page_content=models.TextField(max_length=600)
