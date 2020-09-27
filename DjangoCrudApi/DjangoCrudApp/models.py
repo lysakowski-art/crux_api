@@ -1,9 +1,6 @@
 from djongo import models
-# Create your models here.
-
 
 class Routes(models.Model):
-    
     _id=models.ObjectIdField()
     route_title=models.CharField(max_length=40,blank=False)
     route_author=models.CharField(max_length=30,blank=False)
@@ -16,10 +13,12 @@ class Routes(models.Model):
     #added_by==models.CharField(max_length=30)
     location=models.CharField(max_length=50)
 
-# class Region(models.Model):
-#     region_name=models.CharField()
-
 class Pages(models.Model):
     _id=models.ObjectIdField()
     page_title=models.CharField(max_length=50)
     page_content=models.TextField(max_length=600)
+
+class Regions(models.Model):
+    _id=models.ObjectIdField()
+    region_name=models.CharField(max_length=50, blank=False)
+    group_of_regions=models.CharField(max_length=50, blank=False)

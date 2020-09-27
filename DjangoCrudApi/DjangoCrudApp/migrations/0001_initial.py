@@ -15,7 +15,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Routes',
             fields=[
-                ('_id', djongo.models.fields.ObjectIdField(auto_created=True, primary_key=True, serialize=False)),
+                ('_id', djongo.models.fields.ObjectIdField(
+                    auto_created=True, primary_key=True, serialize=False)),
                 ('route_title', models.CharField(max_length=40)),
                 ('route_author', models.CharField(max_length=30)),
                 ('route_rank', models.IntegerField()),
