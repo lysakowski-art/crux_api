@@ -3,6 +3,10 @@
 My project [CruxApi] make posible to:
 -add new and old climbing routes,
 -find routes by specified conditions(for example dificulty level or region)
+-I am planning to add features like:
+    -creating an account,
+    -login, authorization,
+    -and most needed - possibility to find region with routes by personal level range nearby our location
 
 # Overview
 
