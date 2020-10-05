@@ -18,6 +18,6 @@ from django.urls import path
 urlpatterns = [
     path('routes/', views.routes_list),
     path('routes/<int:route_rank>/<str:region>', views.routes_filtered),
-    path('pages/<str:id>', views.pages_id),
+    path('pages/<str:page_title>', views.pages_id),
     path('regions/', views.regions_list),
 ]

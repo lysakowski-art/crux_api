@@ -5,10 +5,12 @@ from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from bson import ObjectId
+
 # MODELS!
-from DjangoCrudApp.models import Routes
-from DjangoCrudApp.models import Pages
-from DjangoCrudApp.models import Regions
+from DjangoCrudApp.models import Route
+from DjangoCrudApp.models import Page
+from DjangoCrudApp.models import Region
+
 # SERIALIZERS
 from DjangoCrudApp.serializers import RouteSerializer
 from DjangoCrudApp.serializers import PageSerializer
@@ -23,7 +25,7 @@ from rest_framework.decorators import api_view
 def routes_list(request):
 
     if request.method == "GET":
-        routes = Routes.objects.all()
+        routes = Route.objects.all()
 
         route_title = request.query_params.get('route_title', None)
         if route_title is not None:
@@ -44,7 +46,7 @@ def routes_list(request):
 @api_view(['GET', 'PUT', 'DELETE'])
 def routes_filtered(request, route_rank, region):
     try:
-        routes = Routes.objects.all()
+        routes = Route.objects.all()
         if request.method == "GET":
             if route_rank != 0 and region != "random":
                 routes = routes.filter(route_rank=route_rank, region=region)
@@ -71,24 +73,37 @@ def routes_filtered(request, route_rank, region):
 
 
 @api_view(['GET'])
-def pages_id(request, id):
+def pages_id(request, page_title):
     try:
-        page = Pages.objects.get(_id=ObjectId(id))
-    except Pages.DoesNotExist:
+        pages = Page.objects.all()
+    except Page.DoesNotExist:
         return JsonResponse({'message': 'The page does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == "GET":
-        page_serializer = PageSerializer(page)
-        print(page_serializer)
-        return JsonResponse(page_serializer.data)
+        # pages = Page.objects.all()
+        # page_title = request.query_params.get('page_title', None)
+        pages = pages.filter(page_title__icontains=page_title)
+
+        pages_serializer = PageSerializer(pages, many=True)
+        return JsonResponse(pages_serializer.data, safe=False)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def regions_list(request):
     if request.method == "GET":
-        regions = Regions.objects.all()
+        regions = Region.objects.all()
+
         region_name = request.query_params.get('region_name', None)
         if region_name is not None:
             regions = routes.filter(region_name__icontains=region_title)
         regions_serializer = RegionSerializer(regions, many=True)
         return JsonResponse(regions_serializer.data, safe=False)
+    
+    elif request.method == "POST":
+        region_data = JSONParser().parse(request)
+        region_serializer = RegionSerializer(data=region_data)
+
+        if region_serializer.is_valid():
+            region_serializer.save()
+            return JsonResponse(region_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(region_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
