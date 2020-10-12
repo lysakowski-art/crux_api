@@ -86,7 +86,10 @@ WSGI_APPLICATION = 'DjangoCrudApi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': "django_mongodb",
+        'NAME': 'django_mongodb',
+        'CLIENT': {
+            'host': "mongodb+srv://lysakowski-art:climbing@cluster0.m2d63.mongodb.net/django_mongodb?retryWrites=true&w=majority"
+        },   
     }
 }
 
