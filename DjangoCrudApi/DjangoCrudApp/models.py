@@ -13,11 +13,11 @@ class Route(models.Model):
     route_author=models.CharField(max_length=30,blank=False)
     route_rank=models.IntegerField(blank=False)
     route_type=models.BooleanField(default=True,blank=False)
-    region=models.ForeignKey(Region, on_delete=models.CASCADE)
-    route_img=models.URLField(max_length=1000)
+    region=models.CharField(max_length=30, blank=False, default=None)
+    # route_img=models.URLField(max_length=1000)
     placemant_and_belay_anchor=models.IntegerField(default=1)
     route_description=models.CharField(max_length=250)
-    location=models.CharField(max_length=50)
+    # location=models.CharField(max_length=50)
 
 
 class Page(models.Model):

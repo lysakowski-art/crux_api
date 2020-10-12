@@ -35,6 +35,7 @@ def routes_list(request):
 
     elif request.method == "POST":
         route_data = JSONParser().parse(request)
+        print(route_data)
         route_serializer = RouteSerializer(data=route_data)
 
         if route_serializer.is_valid():

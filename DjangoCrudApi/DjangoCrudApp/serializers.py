@@ -14,11 +14,10 @@ class RouteSerializer(serializers.ModelSerializer):
                   'route_rank',
                   'route_type',
                   'region',
-                  'route_img',
+                #   'route_img',
                   'placemant_and_belay_anchor',
-                  'route_description',
-                  'added_by',
-                  'location')
+                  'route_description')
+                #   'location')
 
 
 class PageSerializer(serializers.ModelSerializer):
